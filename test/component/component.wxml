@@ -1,0 +1,22 @@
+<view class="box">
+  <view class="main">
+    <image src="{{data.item_pic}}" class="item"></image>
+    <view class="wrap">
+      <image src="https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fcb3bd900b8311e986c47f0232efd9cf.png" class="location"></image>
+      <text class="distance">距离{{data.item_distance}}m</text>
+    </view>
+  </view>
+  <view class="submain">
+    <text class="title">{{data.item_title}}</text>
+  </view>
+  <view class="ft">
+    <view class="desc-wrap">
+      <image src="{{data.avator_pic}}" class="avator"></image>
+      <text class="desc">{{data.tag}}</text>
+    </view>
+    <view class="group">
+      <image src="https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fb4ba2100b8311e9aeba3d40ac587801.png" class="shoucang"></image>
+      <text class="num">{{data.like_num}}</text>
+    </view>
+  </view>
+</view>

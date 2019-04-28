@@ -1,0 +1,1114 @@
+{
+  "__VERSION__": "2.0",
+  "type": "Block",
+  "id": "Block-218564",
+  "children": [
+    {
+      "type": "Block",
+      "id": "Block-440768",
+      "__VERSION__": "2.0",
+      "children": [
+        {
+          "id": "Image-7",
+          "__VERSION__": "2.0",
+          "type": "Image",
+          "children": [],
+          "__ADAPT__": true,
+          "componentType": "picture",
+          "title": "Image",
+          "attrs": {
+            "y": 0,
+            "x": 0,
+            "source": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fc5dd5600b8311e9a8dd9b63731c684c.png",
+            "src": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fc5dd5600b8311e9a8dd9b63731c684c.png",
+            "className": "item"
+          },
+          "style": {
+            "width": 342,
+            "height": 342,
+            "position": "relative"
+          },
+          "props": {},
+          "semantic": {
+            "dvc_default": [
+              {
+                "name": "dvc_default",
+                "level": 100,
+                "result": "pic",
+                "id": 186506
+              }
+            ],
+            "dvc_picture": [
+              {
+                "name": "dvc_picture",
+                "level": 55,
+                "result": "item",
+                "dataSuggest": {
+                  "source": "data",
+                  "sourceValue": "item_pic",
+                  "matchRule": "ITEM_PIC"
+                },
+                "id": 392227,
+                "choose": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "Shape-8",
+          "__VERSION__": "2.0",
+          "type": "Shape",
+          "children": [
+            {
+              "id": "Image-10",
+              "__VERSION__": "2.0",
+              "type": "Image",
+              "children": [],
+              "__ADAPT__": true,
+              "componentType": "picture",
+              "title": "Image",
+              "attrs": {
+                "y": 24,
+                "x": 28,
+                "source": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fcb3bd900b8311e986c47f0232efd9cf.png",
+                "src": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fcb3bd900b8311e986c47f0232efd9cf.png",
+                "className": "location"
+              },
+              "style": {
+                "width": 14,
+                "height": 18
+              },
+              "props": {},
+              "classHasEdit": true,
+              "semantic": {
+                "dvc_default": [
+                  {
+                    "name": "dvc_default",
+                    "level": 100,
+                    "result": "img",
+                    "id": 397719
+                  }
+                ],
+                "dvc_picture": [
+                  {
+                    "name": "dvc_picture",
+                    "level": 88,
+                    "result": "tubiaozhizuomoban",
+                    "id": 508806
+                  }
+                ],
+                "dvc_class": [
+                  {
+                    "name": "dvc_class",
+                    "level": 100,
+                    "result": "location",
+                    "id": 237044,
+                    "choose": true
+                  }
+                ]
+              }
+            },
+            {
+              "__VERSION__": "2.0",
+              "type": "Text",
+              "id": "Text-9",
+              "__ADAPT__": true,
+              "componentType": "text",
+              "innerText": "距离500m",
+              "title": "Text",
+              "attrs": {
+                "y": 24,
+                "x": 46,
+                "lines": 1,
+                "text": "距离500m",
+                "className": "distance"
+              },
+              "style": {
+                "fontWeight": 400,
+                "color": "rgba(255,255,255,1)",
+                "height": 18,
+                "fontFamily": "PingFangSC",
+                "fontSize": 18,
+                "lineHeight": "18px",
+                "marginLeft": 4,
+                "whiteSpace": "nowrap"
+              },
+              "props": {},
+              "semantic": {
+                "dvc_default": [
+                  {
+                    "name": "dvc_default",
+                    "level": 100,
+                    "result": "word",
+                    "id": 256584
+                  }
+                ],
+                "dvc_text": [
+                  {
+                    "name": "dvc_text",
+                    "level": 55,
+                    "result": "distance",
+                    "id": 485743,
+                    "choose": true
+                  }
+                ]
+              }
+            }
+          ],
+          "__ADAPT__": true,
+          "deleteStyle": {
+            "maxWidth": 122
+          },
+          "componentType": "view",
+          "title": "Shape",
+          "attrs": {
+            "y": 18,
+            "x": 18,
+            "className": "wrap"
+          },
+          "style": {
+            "borderBottomRightRadius": 15,
+            "borderTopRightRadius": 15,
+            "height": 30,
+            "borderBottomLeftRadius": 15,
+            "backgroundColor": "rgba(0,0,0,0.4000000059604645)",
+            "borderTopLeftRadius": 15,
+            "position": "absolute",
+            "left": 18,
+            "top": 18,
+            "display": "flex",
+            "flexDirection": "row",
+            "paddingLeft": 10,
+            "paddingRight": 9,
+            "alignItems": "center",
+            "boxSizing": "border-box"
+          },
+          "props": {},
+          "collapsed": false,
+          "semantic": {
+            "dvc_default": [
+              {
+                "name": "dvc_default",
+                "level": 100,
+                "result": "block",
+                "id": 400477
+              }
+            ],
+            "dvc_view": [
+              {
+                "name": "dvc_view",
+                "level": 95,
+                "result": "wrap",
+                "id": 30595,
+                "choose": true
+              }
+            ]
+          }
+        }
+      ],
+      "__ADAPT__": true,
+      "componentType": "view",
+      "title": "Block",
+      "attrs": {
+        "x": 0,
+        "y": 0,
+        "className": "main"
+      },
+      "style": {
+        "position": "relative",
+        "width": 342,
+        "height": 342,
+        "display": "flex",
+        "flexDirection": "row",
+        "alignItems": "flex-start"
+      },
+      "props": {},
+      "semantic": {
+        "dvc_layout": [
+          {
+            "name": "dvc_layout",
+            "level": 100,
+            "result": "main",
+            "id": 577832,
+            "choose": true
+          }
+        ],
+        "dvc_default": [
+          {
+            "name": "dvc_default",
+            "level": 100,
+            "result": "view",
+            "id": 934845
+          }
+        ],
+        "dvc_view": [
+          {
+            "name": "dvc_view",
+            "level": 95,
+            "result": "outer",
+            "id": 181432
+          }
+        ],
+        "dvc_picture": [
+          {
+            "name": "dvc_picture",
+            "level": 55,
+            "result": "itemWrap",
+            "id": 311393
+          }
+        ]
+      }
+    },
+    {
+      "type": "Block",
+      "id": "Block-447958",
+      "__VERSION__": "2.0",
+      "__GRID__": "NEWROW",
+      "children": [
+        {
+          "__VERSION__": "2.0",
+          "type": "Text",
+          "id": "Text-6",
+          "componentType": "text",
+          "innerText": "小户型卫浴怎样才能装得高大上？",
+          "title": "Text",
+          "attrs": {
+            "y": 364,
+            "x": 18,
+            "lines": 2,
+            "text": "小户型卫浴怎样才能装得高大上？",
+            "className": "title"
+          },
+          "style": {
+            "fontWeight": 400,
+            "width": 306,
+            "color": "rgba(51,51,51,1)",
+            "height": 88,
+            "fontFamily": "PingFangSC",
+            "fontSize": 30,
+            "lineHeight": "44px",
+            "overflow": "hidden",
+            "textOverflow": "ellipsis"
+          },
+          "props": {},
+          "_historyTip": "图层改变",
+          "semantic": {
+            "dvc_default": [
+              {
+                "name": "dvc_default",
+                "level": 100,
+                "result": "txt",
+                "id": 908573
+              }
+            ],
+            "dvc_text": [
+              {
+                "name": "dvc_text",
+                "level": 73,
+                "result": "title",
+                "dataSuggest": {
+                  "source": "data",
+                  "sourceValue": "item_title",
+                  "matchRule": "ITEM_TITLE"
+                },
+                "id": 11684,
+                "choose": true
+              }
+            ]
+          }
+        }
+      ],
+      "__ADAPT__": true,
+      "componentType": "view",
+      "title": "Block",
+      "attrs": {
+        "x": 0,
+        "y": 364,
+        "className": "submain"
+      },
+      "style": {
+        "height": 89,
+        "width": 342,
+        "marginTop": 22,
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center"
+      },
+      "props": {},
+      "semantic": {
+        "dvc_layout": [
+          {
+            "name": "dvc_layout",
+            "level": 100,
+            "result": "submain",
+            "id": 212371,
+            "choose": true
+          }
+        ],
+        "dvc_default": [
+          {
+            "name": "dvc_default",
+            "level": 100,
+            "result": "block",
+            "id": 66748
+          }
+        ],
+        "dvc_view": [
+          {
+            "name": "dvc_view",
+            "level": 95,
+            "result": "block",
+            "id": 690841
+          }
+        ],
+        "dvc_text": [
+          {
+            "name": "dvc_text",
+            "level": 78,
+            "result": "titleWrap",
+            "id": 993542
+          }
+        ]
+      }
+    },
+    {
+      "type": "Block",
+      "id": "Block-723348",
+      "__VERSION__": "2.0",
+      "__GRID__": "NEWROW",
+      "children": [
+        {
+          "type": "Block",
+          "id": "Block-606311",
+          "__VERSION__": "2.0",
+          "children": [
+            {
+              "id": "Image-1",
+              "__VERSION__": "2.0",
+              "type": "Image",
+              "children": [],
+              "__ADAPT__": true,
+              "componentType": "picture",
+              "title": "Image",
+              "attrs": {
+                "y": 480,
+                "x": 18,
+                "source": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fb05e6800b8311e986c47f0232efd9cf.png",
+                "src": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fb05e6800b8311e986c47f0232efd9cf.png",
+                "className": "avator"
+              },
+              "style": {
+                "width": 30,
+                "height": 30
+              },
+              "props": {},
+              "semantic": {
+                "dvc_default": [
+                  {
+                    "name": "dvc_default",
+                    "level": 100,
+                    "result": "image",
+                    "id": 173981
+                  }
+                ],
+                "dvc_picture": [
+                  {
+                    "name": "dvc_picture",
+                    "level": 40,
+                    "result": "avator",
+                    "id": 369747,
+                    "choose": true
+                  }
+                ]
+              }
+            },
+            {
+              "__VERSION__": "2.0",
+              "type": "Text",
+              "id": "Text-2",
+              "__ADAPT__": true,
+              "componentType": "text",
+              "innerText": "时尚家居",
+              "title": "Text",
+              "attrs": {
+                "y": 483,
+                "x": 54,
+                "lines": 1,
+                "text": "时尚家居",
+                "className": "desc"
+              },
+              "style": {
+                "fontWeight": 300,
+                "color": "rgba(102,102,102,1)",
+                "height": 24,
+                "fontFamily": "PingFangSC",
+                "fontSize": 24,
+                "lineHeight": "24px",
+                "marginLeft": 6,
+                "marginTop": 3,
+                "whiteSpace": "nowrap"
+              },
+              "props": {},
+              "semantic": {
+                "dvc_default": [
+                  {
+                    "name": "dvc_default",
+                    "level": 100,
+                    "result": "text",
+                    "id": 84275
+                  }
+                ],
+                "dvc_text": [
+                  {
+                    "name": "dvc_text",
+                    "level": 10,
+                    "result": "desc",
+                    "id": 424898,
+                    "choose": true
+                  }
+                ]
+              }
+            }
+          ],
+          "__ADAPT__": true,
+          "componentType": "view",
+          "title": "Block",
+          "attrs": {
+            "x": 18,
+            "y": 480,
+            "className": "descWrap"
+          },
+          "style": {
+            "display": "flex",
+            "flexDirection": "row",
+            "height": 31
+          },
+          "props": {},
+          "semantic": {
+            "dvc_default": [
+              {
+                "name": "dvc_default",
+                "level": 100,
+                "result": "view",
+                "id": 843373
+              }
+            ],
+            "dvc_view": [
+              {
+                "name": "dvc_view",
+                "level": 95,
+                "result": "block",
+                "id": 853170
+              }
+            ],
+            "dvc_text": [
+              {
+                "name": "dvc_text",
+                "level": 10,
+                "result": "descWrap",
+                "id": 83527,
+                "choose": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "Block",
+          "id": "Block-926364",
+          "__VERSION__": "2.0",
+          "children": [
+            {
+              "id": "Image-4",
+              "__VERSION__": "2.0",
+              "type": "Image",
+              "children": [],
+              "__ADAPT__": true,
+              "componentType": "picture",
+              "title": "Image",
+              "attrs": {
+                "y": 484,
+                "x": 261,
+                "source": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fb4ba2100b8311e9aeba3d40ac587801.png",
+                "src": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fb4ba2100b8311e9aeba3d40ac587801.png",
+                "className": "shoucang"
+              },
+              "style": {
+                "width": 22,
+                "height": 22,
+                "marginTop": 4
+              },
+              "props": {},
+              "classHasEdit": true,
+              "semantic": {
+                "dvc_default": [
+                  {
+                    "name": "dvc_default",
+                    "level": 100,
+                    "result": "picture",
+                    "id": 467965
+                  }
+                ],
+                "dvc_picture": [
+                  {
+                    "name": "dvc_picture",
+                    "level": 88,
+                    "result": "waiqin",
+                    "id": 824037
+                  }
+                ],
+                "dvc_class": [
+                  {
+                    "name": "dvc_class",
+                    "level": 100,
+                    "result": "shoucang",
+                    "id": 799057,
+                    "choose": true
+                  }
+                ]
+              }
+            },
+            {
+              "__VERSION__": "2.0",
+              "type": "Text",
+              "id": "Text-3",
+              "__ADAPT__": true,
+              "componentType": "text",
+              "innerText": "168",
+              "title": "Text",
+              "attrs": {
+                "y": 484,
+                "x": 288,
+                "lines": 1,
+                "text": "168",
+                "className": "num"
+              },
+              "style": {
+                "fontWeight": 400,
+                "color": "rgba(153,153,153,1)",
+                "height": 22,
+                "fontFamily": "PingFangSC",
+                "fontSize": 22,
+                "lineHeight": "22px",
+                "marginLeft": 5,
+                "marginTop": 4,
+                "whiteSpace": "nowrap"
+              },
+              "props": {},
+              "semantic": {
+                "dvc_default": [
+                  {
+                    "name": "dvc_default",
+                    "level": 100,
+                    "result": "txt",
+                    "id": 150418
+                  }
+                ],
+                "dvc_text": [
+                  {
+                    "name": "dvc_text",
+                    "level": 40,
+                    "result": "num",
+                    "id": 690119,
+                    "choose": true
+                  }
+                ]
+              }
+            }
+          ],
+          "__ADAPT__": true,
+          "componentType": "view",
+          "title": "Block",
+          "attrs": {
+            "x": 261,
+            "y": 480,
+            "className": "group"
+          },
+          "style": {
+            "display": "flex",
+            "flexDirection": "row",
+            "height": 31
+          },
+          "props": {},
+          "collapsed": false,
+          "semantic": {
+            "dvc_default": [
+              {
+                "name": "dvc_default",
+                "level": 100,
+                "result": "block",
+                "id": 814646
+              }
+            ],
+            "dvc_view": [
+              {
+                "name": "dvc_view",
+                "level": 95,
+                "result": "group",
+                "id": 343826,
+                "choose": true
+              }
+            ]
+          }
+        }
+      ],
+      "__ADAPT__": true,
+      "componentType": "view",
+      "title": "Block",
+      "attrs": {
+        "x": 0,
+        "y": 480,
+        "className": "ft"
+      },
+      "style": {
+        "height": 32,
+        "width": 342,
+        "marginTop": 28,
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingLeft": 18,
+        "paddingRight": 17,
+        "boxSizing": "border-box"
+      },
+      "props": {},
+      "semantic": {
+        "dvc_layout": [
+          {
+            "name": "dvc_layout",
+            "level": 100,
+            "result": "ft",
+            "id": 46774,
+            "choose": true
+          }
+        ],
+        "dvc_default": [
+          {
+            "name": "dvc_default",
+            "level": 100,
+            "result": "view",
+            "id": 214512
+          }
+        ],
+        "dvc_view": [
+          {
+            "name": "dvc_view",
+            "level": 95,
+            "result": "group",
+            "id": 778906
+          }
+        ]
+      }
+    }
+  ],
+  "artboardImg": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fd2655800b8311e9aeba3d40ac587801.png",
+  "name": "Group 32 Copy 3",
+  "componentType": "view",
+  "title": "Block",
+  "attrs": {
+    "y": 0,
+    "x": 0,
+    "className": "box"
+  },
+  "style": {
+    "width": 342,
+    "backgroundColor": "rgba(255,255,255,1)",
+    "height": 534,
+    "display": "flex",
+    "flexDirection": "column",
+    "alignItems": "flex-start"
+  },
+  "props": {},
+  "dataConfig": {
+    "customerAttrs": {},
+    "dynamicOrigin": [
+      {
+        "name": "data",
+        "origin": {
+          "type": "expression",
+          "expression": "let data = this.props && this.props.data;"
+        },
+        "merge": [
+          {
+            "type": "schemaApp",
+            "appId": "dvc-7565"
+          }
+        ]
+      },
+      {
+        "name": "attrs",
+        "origin": {
+          "type": "expression",
+          "expression": "let attrs = this.props && this.props.attrs;"
+        },
+        "merge": [
+          {
+            "type": "schemaApp",
+            "appId": "dvc-7565"
+          }
+        ]
+      },
+      {
+        "name": "pageInfo",
+        "origin": {
+          "type": "expression",
+          "expression": "let pageInfo = this.props && this.props.pageInfo;"
+        },
+        "merge": []
+      }
+    ]
+  },
+  "dataBindingStore": [
+    {
+      "value": {
+        "isStatic": false,
+        "isHandEdit": true,
+        "source": "data",
+        "helperScriptName": null,
+        "sourceValue": [
+          {
+            "value": "${data.item_pic}",
+            "type": "DYNAMIC"
+          }
+        ]
+      },
+      "smart": {
+        "rule": "ITEM_PIC",
+        "type": "dynamic"
+      },
+      "schema": {
+        "schemaProps": {
+          "description": "dvc schema描述",
+          "properties": {
+            "item_pic": {
+              "title": "item_pic",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "belongId": "Image-7",
+      "defaultValue": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fc5dd5600b8311e9a8dd9b63731c684c.png",
+      "target": [
+        "source"
+      ]
+    },
+    {
+      "belongId": "Image-10",
+      "target": [
+        "source"
+      ],
+      "value": {
+        "isStatic": true,
+        "staticType": "STRING",
+        "value": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fcb3bd900b8311e986c47f0232efd9cf.png"
+      },
+      "defaultValue": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fcb3bd900b8311e986c47f0232efd9cf.png",
+      "smart": {
+        "type": "static",
+        "rule": "user"
+      }
+    },
+    {
+      "belongId": "Text-9",
+      "target": [
+        "innerText"
+      ],
+      "value": {
+        "helperScriptName": null,
+        "isHandEdit": true,
+        "isStatic": false,
+        "schema": {
+          "schemaProps": {
+            "description": "dvc schema描述",
+            "properties": {
+              "item_distance": {
+                "title": "item_distance",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "source": "data",
+        "sourceValue": [
+          {
+            "value": "距离",
+            "type": "STATIC"
+          },
+          {
+            "value": "${data.item_distance}",
+            "type": "DYNAMIC"
+          },
+          {
+            "value": "m",
+            "type": "STATIC"
+          }
+        ],
+        "sourceList": []
+      },
+      "defaultValue": "距离500m",
+      "smart": {
+        "type": "dynamic",
+        "rule": "default"
+      }
+    },
+    {
+      "value": {
+        "isStatic": false,
+        "isHandEdit": true,
+        "source": "data",
+        "helperScriptName": null,
+        "sourceValue": [
+          {
+            "value": "${data.item_title}",
+            "type": "DYNAMIC"
+          }
+        ]
+      },
+      "smart": {
+        "rule": "ITEM_TITLE",
+        "type": "dynamic"
+      },
+      "schema": {
+        "schemaProps": {
+          "description": "dvc schema描述",
+          "properties": {
+            "item_title": {
+              "title": "item_title",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "belongId": "Text-6",
+      "defaultValue": "小户型卫浴怎样才能装得高大上？",
+      "target": [
+        "innerText"
+      ]
+    },
+    {
+      "belongId": "Image-1",
+      "target": [
+        "source"
+      ],
+      "value": {
+        "helperScriptName": null,
+        "isHandEdit": true,
+        "isStatic": false,
+        "schema": {
+          "schemaProps": {
+            "description": "dvc schema描述",
+            "properties": {
+              "avator_pic": {
+                "title": "avator_pic",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "source": "data",
+        "sourceValue": [
+          {
+            "value": "${data.avator_pic}",
+            "type": "DYNAMIC"
+          }
+        ],
+        "sourceList": []
+      },
+      "defaultValue": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fb05e6800b8311e986c47f0232efd9cf.png",
+      "smart": {
+        "type": "dynamic",
+        "rule": "default"
+      }
+    },
+    {
+      "belongId": "Text-2",
+      "target": [
+        "innerText"
+      ],
+      "value": {
+        "helperScriptName": null,
+        "isHandEdit": true,
+        "isStatic": false,
+        "schema": {
+          "schemaProps": {
+            "description": "dvc schema描述",
+            "properties": {
+              "tag": {
+                "title": "tag",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "source": "data",
+        "sourceValue": [
+          {
+            "value": "${data.tag}",
+            "type": "DYNAMIC"
+          }
+        ],
+        "sourceList": []
+      },
+      "defaultValue": "时尚家居",
+      "smart": {
+        "type": "dynamic",
+        "rule": "default"
+      }
+    },
+    {
+      "belongId": "Image-4",
+      "target": [
+        "source"
+      ],
+      "value": {
+        "isStatic": true,
+        "staticType": "STRING",
+        "value": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fb4ba2100b8311e9aeba3d40ac587801.png"
+      },
+      "defaultValue": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fb4ba2100b8311e9aeba3d40ac587801.png",
+      "smart": {
+        "type": "dynamic",
+        "rule": "user"
+      }
+    },
+    {
+      "belongId": "Text-3",
+      "target": [
+        "innerText"
+      ],
+      "value": {
+        "helperScriptName": null,
+        "isHandEdit": true,
+        "isStatic": false,
+        "schema": {
+          "schemaProps": {
+            "description": "dvc schema描述",
+            "properties": {
+              "like_num": {
+                "title": "like_num",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "source": "data",
+        "sourceValue": [
+          {
+            "value": "${data.like_num}",
+            "type": "DYNAMIC"
+          }
+        ],
+        "sourceList": []
+      },
+      "defaultValue": "168",
+      "smart": {
+        "type": "dynamic",
+        "rule": "default"
+      }
+    }
+  ],
+  "rootProps": {
+    "JSONSchema": {
+      "title": "根节点属性",
+      "description": "不同营销场景下配置不同，这里配置的是淘宝命运石RAX链路下的模块根节点属性",
+      "type": "object",
+      "required": [
+        "gSize",
+        "marginRight",
+        "marginTop"
+      ],
+      "properties": {
+        "gSize": {
+          "type": "integer",
+          "title": "一行几个",
+          "default": 2
+        },
+        "marginRight": {
+          "type": "integer",
+          "title": "模块横向间距",
+          "default": 24
+        },
+        "marginTop": {
+          "type": "integer",
+          "title": "模块纵向间距",
+          "default": 24
+        },
+        "backup": {
+          "type": "boolean",
+          "title": "启用空坑处理",
+          "default": true
+        },
+        "tracker": {
+          "type": "boolean",
+          "title": "启用埋点",
+          "default": false
+        }
+      }
+    },
+    "UISchema": {
+      "gSize": {
+        "ui:title": "一行几个"
+      },
+      "marginRight": {
+        "ui:title": "模块横向间距"
+      },
+      "marginTop": {
+        "ui:title": "模块纵向间距"
+      },
+      "backup": {
+        "ui:widget": "switch",
+        "ui:title": "启用空坑处理"
+      },
+      "tracker": {
+        "ui:widget": "switch",
+        "ui:title": "启用埋点"
+      }
+    },
+    "formData": {
+      "gSize": 2,
+      "marginRight": 24,
+      "marginTop": 24,
+      "backup": true,
+      "tracker": false
+    }
+  },
+  "scriptStore": [
+    {
+      "belongId": "Text-6",
+      "eventType": "onClick",
+      "scriptName": "onClick_1",
+      "content": ""
+    },
+    {
+      "belongId": "Text-6",
+      "eventType": "onAppear",
+      "scriptName": "onAppear_1",
+      "content": "/**\n * @author miaojing\n * @version 1.0\n * @param\n * @return\n */\nexport default function(){\n\n};"
+    }
+  ],
+  "semantic": {
+    "dvc_default": [
+      {
+        "name": "dvc_default",
+        "level": 100,
+        "result": "block",
+        "id": 38189
+      }
+    ],
+    "dvc_layout": [
+      {
+        "name": "dvc_layout",
+        "level": 100,
+        "result": "box",
+        "id": 395998,
+        "choose": true
+      }
+    ]
+  }
+}

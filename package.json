@@ -1,20 +1,30 @@
 {
   "name": "imgcook-dsl-template",
   "eslintConfig": {
-    "root": true
+    "root": true,
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
+    }
   },
   "devDependencies": {
     "co": "4.x.x",
+    "fs-extra": "^7.0.1",
+    "lodash": ">=4.17.11",
     "prettier": "^1.11.1",
     "thunkify": "2.x.x",
     "vm2": "^3.5.2",
     "xml-beautifier": "0.x.x",
     "xtemplate": "4.x.x",
-    "xtpl": "3.x.x",
-    "lodash": ">=4.17.11"
+    "xtpl": "3.x.x"
   },
   "scripts": {
     "build": "webpack",
     "test": "node ./test/index.js"
+  },
+  "dependencies": {
+    "@imgcook/dsl-helper": "0.0.1-alpha.0"
   }
 }

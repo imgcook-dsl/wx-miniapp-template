@@ -1,0 +1,123 @@
+.box {
+  width: 342rpx;
+  background-color: rgba(255,255,255,1);
+  height: 534rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.main {
+  position: relative;
+  width: 342rpx;
+  height: 342rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.item {
+  width: 342rpx;
+  height: 342rpx;
+  position: relative;
+}
+.wrap {
+  border-bottom-right-radius: 15rpx;
+  border-top-right-radius: 15rpx;
+  height: 30rpx;
+  border-bottom-left-radius: 15rpx;
+  background-color: rgba(0,0,0,0.4000000059604645);
+  border-top-left-radius: 15rpx;
+  position: absolute;
+  left: 18rpx;
+  top: 18rpx;
+  display: flex;
+  flex-direction: row;
+  padding-left: 10rpx;
+  padding-right: 9rpx;
+  align-items: center;
+  box-sizing: border-box;
+}
+.location {
+  width: 14rpx;
+  height: 18rpx;
+}
+.distance {
+  font-weight: 400;
+  color: rgba(255,255,255,1);
+  height: 18rpx;
+  font-family: PingFangSC;
+  font-size: 18rpx;
+  line-height: 18rpx;
+  margin-left: 4rpx;
+  white-space: nowrap;
+}
+.submain {
+  height: 89rpx;
+  width: 342rpx;
+  margin-top: 22rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.title {
+  font-weight: 400;
+  width: 306rpx;
+  color: rgba(51,51,51,1);
+  height: 88rpx;
+  font-family: PingFangSC;
+  font-size: 30rpx;
+  line-height: 44rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ft {
+  height: 32rpx;
+  width: 342rpx;
+  margin-top: 28rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 18rpx;
+  padding-right: 17rpx;
+  box-sizing: border-box;
+}
+.desc-wrap {
+  display: flex;
+  flex-direction: row;
+  height: 31rpx;
+}
+.avator {
+  width: 30rpx;
+  height: 30rpx;
+}
+.desc {
+  font-weight: 300;
+  color: rgba(102,102,102,1);
+  height: 24rpx;
+  font-family: PingFangSC;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  margin-left: 6rpx;
+  margin-top: 3rpx;
+  white-space: nowrap;
+}
+.group {
+  display: flex;
+  flex-direction: row;
+  height: 31rpx;
+}
+.shoucang {
+  width: 22rpx;
+  height: 22rpx;
+  margin-top: 4rpx;
+}
+.num {
+  font-weight: 400;
+  color: rgba(153,153,153,1);
+  height: 22rpx;
+  font-family: PingFangSC;
+  font-size: 22rpx;
+  line-height: 22rpx;
+  margin-left: 5rpx;
+  margin-top: 4rpx;
+  white-space: nowrap;
+}
