@@ -20,11 +20,7 @@ co(function*() {
     _: _,
     helper: dslHelper,
   });
-  // Parse the code using an interface similar to require("esprima").parse.
-  const wxml = yield xtplRender(path.resolve(__dirname, './templates/wxml.xtpl'), renderInfo , {});
-  const wxss = yield xtplRender(path.resolve(__dirname, './templates/wxss.xtpl'), renderInfo, {});
-  const js = yield xtplRender(path.resolve(__dirname, './templates/js.xtpl'), renderInfo, {});
-  const json = yield xtplRender(path.resolve(__dirname, './templates/json.xtpl'), {}, {});
+  const { wxml, wxss, js, json } = renderInfo;
   fs.ensureDirSync(path.resolve(__dirname, './component'));
   fs.writeFileSync(path.join(__dirname, './component/component.wxml'), wxml);
   fs.writeFileSync(path.join(__dirname, './component/component.wxss'), wxss);

@@ -14,4 +14,3 @@ Component({
     onTap: function() {}
   }
 });
-
