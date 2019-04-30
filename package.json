@@ -1,5 +1,5 @@
 {
-  "name": "imgcook-dsl-template",
+  "name": "@imgcook/wx-miniapp-template",
   "eslintConfig": {
     "root": true,
     "parserOptions": {
@@ -10,15 +10,15 @@
     }
   },
   "devDependencies": {
-    "co": "4.x.x",
+    "co": "^4.6.0",
     "fs-extra": "^7.0.1",
-    "lodash": ">=4.17.11",
+    "lodash": "^4.17.11",
     "prettier": "^1.11.1",
-    "thunkify": "2.x.x",
+    "thunkify": "^2.1.2",
     "vm2": "^3.5.2",
-    "xml-beautifier": "0.x.x",
-    "xtemplate": "4.x.x",
-    "xtpl": "3.x.x"
+    "xml-beautifier": "^0.4.0",
+    "xtemplate": "^4.6.1",
+    "xtpl": "^3.4.0"
   },
   "scripts": {
     "build": "webpack",

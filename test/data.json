@@ -789,15 +789,11 @@
       },
       "belongId": "Image-7",
       "defaultValue": "https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fc5dd5600b8311e9a8dd9b63731c684c.png",
-      "target": [
-        "source"
-      ]
+      "target": ["source"]
     },
     {
       "belongId": "Image-10",
-      "target": [
-        "source"
-      ],
+      "target": ["source"],
       "value": {
         "isStatic": true,
         "staticType": "STRING",
@@ -811,9 +807,7 @@
     },
     {
       "belongId": "Text-9",
-      "target": [
-        "innerText"
-      ],
+      "target": ["innerText"],
       "value": {
         "helperScriptName": null,
         "isHandEdit": true,
@@ -884,15 +878,11 @@
       },
       "belongId": "Text-6",
       "defaultValue": "小户型卫浴怎样才能装得高大上？",
-      "target": [
-        "innerText"
-      ]
+      "target": ["innerText"]
     },
     {
       "belongId": "Image-1",
-      "target": [
-        "source"
-      ],
+      "target": ["source"],
       "value": {
         "helperScriptName": null,
         "isHandEdit": true,
@@ -926,9 +916,7 @@
     },
     {
       "belongId": "Text-2",
-      "target": [
-        "innerText"
-      ],
+      "target": ["innerText"],
       "value": {
         "helperScriptName": null,
         "isHandEdit": true,
@@ -962,9 +950,7 @@
     },
     {
       "belongId": "Image-4",
-      "target": [
-        "source"
-      ],
+      "target": ["source"],
       "value": {
         "isStatic": true,
         "staticType": "STRING",
@@ -978,9 +964,7 @@
     },
     {
       "belongId": "Text-3",
-      "target": [
-        "innerText"
-      ],
+      "target": ["innerText"],
       "value": {
         "helperScriptName": null,
         "isHandEdit": true,
@@ -1018,11 +1002,7 @@
       "title": "根节点属性",
       "description": "不同营销场景下配置不同，这里配置的是淘宝命运石RAX链路下的模块根节点属性",
       "type": "object",
-      "required": [
-        "gSize",
-        "marginRight",
-        "marginTop"
-      ],
+      "required": ["gSize", "marginRight", "marginTop"],
       "properties": {
         "gSize": {
           "type": "integer",

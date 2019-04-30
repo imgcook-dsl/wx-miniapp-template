@@ -1,4 +1,4 @@
-module.exports = function (layoutData, opts) {
+module.exports = function(layoutData, opts) {
   if (layoutData.attrs.className === 'root') {
     layoutData = layoutData.children[0];
   }
@@ -7,25 +7,26 @@ module.exports = function (layoutData, opts) {
   const { printer, utils } = helper;
 
   const COMPONENT_TYPE_MAP = {
-    'link': 'view',
-    'video': 'video',
-    'expview': 'view',
-    'scroller': 'scroll-view',
-    'slider': 'swiper',
-    'view': 'view',
-    'text': 'text',
-    'picture': 'image',
+    link: 'view',
+    video: 'video',
+    expview: 'view',
+    scroller: 'scroll-view',
+    slider: 'swiper',
+    view: 'view',
+    text: 'text',
+    picture: 'image'
   };
-  const line = (content, level) => utils.line(content, { indent: { space: level * 2 } });
+  const line = (content, level) =>
+    utils.line(content, { indent: { space: level * 2 } });
   const styleMap = {};
   const mockData = {
     properties: {},
-    data: {},
+    data: {}
   };
   const scriptMap = {
     created: '',
     detached: '',
-    methods: {},
+    methods: {}
   };
   let modConfig = layoutData.modStyleConfig || {
     designWidth: 750,
@@ -59,7 +60,7 @@ module.exports = function (layoutData, opts) {
       case 'border-bottom-right-radius':
         value = '' + value;
         value = value.replace(/(rem)|(px)/, '');
-        value = Number(value) * 750 / modConfig.designWidth;
+        value = (Number(value) * 750) / modConfig.designWidth;
         value = '' + value;
 
         if (value.length > 3 && value.substr(-3, 3) == 'rem') {
@@ -74,10 +75,13 @@ module.exports = function (layoutData, opts) {
     return value;
   };
 
-  const parseStyleObject = style => Object.entries(style).filter(([, value]) => value || value === 0).map(([key, value]) => {
-    key = _.kebabCase(key);
-    return `${key}: ${normalizeStyleValue(key, value)};`;
-  });
+  const parseStyleObject = style =>
+    Object.entries(style)
+      .filter(([, value]) => value || value === 0)
+      .map(([key, value]) => {
+        key = _.kebabCase(key);
+        return `${key}: ${normalizeStyleValue(key, value)};`;
+      });
 
   const renderStyleItem = (className, style) => [
     line(`.${className} {`),
@@ -85,9 +89,12 @@ module.exports = function (layoutData, opts) {
     line('}')
   ];
 
-  const renderStyle = map => [].concat(
-    ...Object.entries(map).map(([className, style]) => renderStyleItem(className, style))
-  );
+  const renderStyle = map =>
+    [].concat(
+      ...Object.entries(map).map(([className, style]) =>
+        renderStyleItem(className, style)
+      )
+    );
 
   const normalizeTemplateAttrValue = value => {
     if (typeof value === 'string') {
@@ -97,26 +104,33 @@ module.exports = function (layoutData, opts) {
     }
   };
 
-  const renderTemplateAttr = (key, value) => `${key}=${normalizeTemplateAttrValue(value)}`;
-  const getFuncBody = (content) => {
+  const renderTemplateAttr = (key, value) =>
+    `${key}=${normalizeTemplateAttrValue(value)}`;
+  const getFuncBody = content => {
     if (content) {
-      return content.match(/(?:\/\*[\s\S]*?\*\/|\/\/.*?\r?\n|[^{])+\{([\s\S]*)\};$/)[1];
+      return content.match(
+        /(?:\/\*[\s\S]*?\*\/|\/\/.*?\r?\n|[^{])+\{([\s\S]*)\};$/
+      )[1];
     }
     return '';
   };
   let depth = 0;
   let { dataBindingStore } = layoutData;
 
-  const getScriptStore = (originJson) => {
-    return (originJson.eventStore && originJson.scriptStore) ?  (originJson.eventStore || []).map((v) => {
-      const contentStore = (originJson.scriptStore || []).find(_v => _v.id === v.scriptId);
-      return {
-        belongId: v.belongId,
-        content: contentStore.content,
-        eventType: v.type,
-        scriptName: contentStore.name,
-      };
-    }) : (originJson.scriptStore || []) ;
+  const getScriptStore = originJson => {
+    return originJson.eventStore && originJson.scriptStore
+      ? (originJson.eventStore || []).map(v => {
+          const contentStore = (originJson.scriptStore || []).find(
+            _v => _v.id === v.scriptId
+          );
+          return {
+            belongId: v.belongId,
+            content: contentStore.content,
+            eventType: v.type,
+            scriptName: contentStore.name
+          };
+        })
+      : originJson.scriptStore || [];
   };
   // let scriptStore = originJson.scriptStore || [];
   let scriptStore = getScriptStore(layoutData);
@@ -124,42 +138,45 @@ module.exports = function (layoutData, opts) {
   const renderTemplate = (obj, level = 0) => {
     depth = depth + 1;
 
-    if (Array.isArray(scriptStore)) { // 事件绑定
+    if (Array.isArray(scriptStore)) {
+      // 事件绑定
       if (scriptStore.length > 0) {
-        scriptStore.forEach(({ belongId, eventType, scriptName, content }, index) => {
-          if (belongId === obj.id) {
-            if (depth === 1) {
-              if (eventType === 'init') {
-                scriptMap.created = `
+        scriptStore.forEach(
+          ({ belongId, eventType, scriptName, content }, index) => {
+            if (belongId === obj.id) {
+              if (depth === 1) {
+                if (eventType === 'init') {
+                  scriptMap.created = `
                   function () {
                     ${getFuncBody(content)}
                   }
                 `;
-              } else if (eventType === 'destroy') {
-                scriptMap.detached = `
+                } else if (eventType === 'destroy') {
+                  scriptMap.detached = `
                   function () {
                     ${getFuncBody(content)}
                   }
                 `;
+                }
+              }
+              if (eventType === 'onClick') {
+                scriptMap.methods.onTap = `
+                function () {
+                  ${getFuncBody(content)}
+                }
+              `;
+                obj.attrs.bindtap = 'onTap';
+              }
+              if (eventType === 'helper') {
+                scriptMap.methods[scriptName] = `
+                function () {
+                  ${getFuncBody(content)}
+                }
+              `;
               }
             }
-            if (eventType === 'onClick') {
-              scriptMap.methods.onTap = `
-                function () {
-                  ${getFuncBody(content)}
-                }
-              `;
-              obj.attrs.bindtap = 'onTap';
-            }
-            if (eventType === 'helper') {
-              scriptMap.methods[scriptName] = `
-                function () {
-                  ${getFuncBody(content)}
-                }
-              `;
-            }
           }
-        });
+        );
       }
     }
     // 数据绑定
@@ -185,7 +202,7 @@ module.exports = function (layoutData, opts) {
     // console.log(`${obj.id}的数据绑定对象`, domDataBinding);
     // 处理changetype
     // obj.element = obj.changeType === 'video' ? obj.changeType : obj.componentType;
-    obj.element = COMPONENT_TYPE_MAP[ obj.componentType ] || obj.componentType;
+    obj.element = COMPONENT_TYPE_MAP[obj.componentType] || obj.componentType;
     if (!obj.style) obj.style = {};
     if (!obj.attrs) obj.attrs = {};
 
@@ -196,27 +213,31 @@ module.exports = function (layoutData, opts) {
     if (obj.type && obj.type.toLowerCase() === 'repeat') {
       obj.style.display = 'flex';
       obj.style.flexDirection = 'row';
-      obj.children.forEach(function (child) {
+      obj.children.forEach(function(child) {
         delete child.style.marginTop;
       });
     }
 
     domDataBinding.map(item => {
       const target = item.target[0];
-      if (item.value.isStatic) { // 静态数据
+      if (item.value.isStatic) {
+        // 静态数据
         obj.attrs[target] = item.value.value;
       } else {
         const sourceValue = item.value.sourceValue;
         let value = '';
         if (Array.isArray(sourceValue)) {
-          value = sourceValue.map(item => {
-            if (item.type === 'DYNAMIC') {
-              return `{{${item.value.slice(2, -1)}}}`
-            }
-            return item.value;
-          }).join('');
-        } else { // 通过schema绑定 @TODO
-          value = `{{${item.value.source}.${item.value.sourceValue}}}`
+          value = sourceValue
+            .map(item => {
+              if (item.type === 'DYNAMIC') {
+                return `{{${item.value.slice(2, -1)}}}`;
+              }
+              return item.value;
+            })
+            .join('');
+        } else {
+          // 通过schema绑定 @TODO
+          value = `{{${item.value.source}.${item.value.sourceValue}}}`;
         }
         if (target === 'show') {
           obj.attrs['wx:if'] = value;
@@ -256,7 +277,7 @@ module.exports = function (layoutData, opts) {
       obj.attrs.src = obj.attrs.source;
       delete obj.attrs.source;
     }
-    obj.attrs.class = `${obj.attrs.class}`
+    obj.attrs.class = `${obj.attrs.class}`;
     styleMap[obj.attrs.class] = {
       ...styleMap[obj.attrs.class],
       ...obj.style
@@ -266,40 +287,41 @@ module.exports = function (layoutData, opts) {
     let nextLine = '';
     const attrs = Object.entries(obj.attrs).filter(([key, value]) => {
       if (obj.element === 'image') {
-        return (
-          [
-            'class',
-            'src',
-          ].includes(key)
-        );
+        return ['class', 'src'].includes(key);
       } else if (obj.element === 'video') {
-        return (
-          [
-            'class',
-            'src',
-            'controls',
-            'autoplay',
-            'muted',
-            'poster',
-          ].includes(key)
-        );
+        return [
+          'class',
+          'src',
+          'controls',
+          'autoplay',
+          'muted',
+          'poster'
+        ].includes(key);
       }
       return key === 'class';
     });
     if (attrs.length > 3) {
       ret.push(line(`<${obj.element}`, level));
-      ret = ret.concat(attrs.map(([key, value]) => line(renderTemplateAttr(key, value), level + 1)));
+      ret = ret.concat(
+        attrs.map(([key, value]) =>
+          line(renderTemplateAttr(key, value), level + 1)
+        )
+      );
     } else {
       nextLine = `<${obj.element}`;
       if (attrs.length) {
-        nextLine += ` ${attrs.map(([key, value]) => renderTemplateAttr(key, value)).join(' ')}`;
+        nextLine += ` ${attrs
+          .map(([key, value]) => renderTemplateAttr(key, value))
+          .join(' ')}`;
       }
     }
     if (obj.children) {
       if (Array.isArray(obj.children) && obj.children.length) {
         // 多行 Child
         ret.push(line(`${nextLine}>`, level));
-        ret = ret.concat(...obj.children.map(o => renderTemplate(o, level + 1)));
+        ret = ret.concat(
+          ...obj.children.map(o => renderTemplate(o, level + 1))
+        );
         ret.push(line(`</${obj.element}>`, level));
       } else {
         // 单行 Child
@@ -317,7 +339,9 @@ module.exports = function (layoutData, opts) {
     const properties = [];
     dataBindingStore.forEach(item => {
       if (!item.value.isStatic) {
-        const { value: { sourceValue } } = item
+        const {
+          value: { sourceValue }
+        } = item;
         if (Array.isArray(sourceValue)) {
           sourceValue.forEach(v => {
             const key = v.value.slice(7, -1);
@@ -337,17 +361,21 @@ module.exports = function (layoutData, opts) {
         attached: ${attached || 'function() {}'},
         detached: ${detached || 'function() {}'},
         methods: {
-          ${Object.entries(methods).map(([key, value]) => {
-      return `${key}: ${value}`;
-    }).join(',')}
+          ${Object.entries(methods)
+            .map(([key, value]) => {
+              return `${key}: ${value}`;
+            })
+            .join(',')}
         },
       })
-    `
+    `;
   };
 
   renderData.wxml = printer(renderTemplate(layoutData));
   renderData.wxss = printer(renderStyle(styleMap));
-  renderData.js = prettier.format(renderScript(scriptMap, dataBindingStore), { parser: 'babel' });
+  renderData.js = prettier.format(renderScript(scriptMap, dataBindingStore), {
+    parser: 'babel'
+  });
 
   renderData.mockData = `var mock = ${JSON.stringify(mockData)}`;
   renderData.json = printer([
@@ -365,7 +393,7 @@ module.exports = function (layoutData, opts) {
         panelName: 'component.wxml',
         panelValue: renderData.wxml,
         panelType: 'BuilderRaxView',
-        mode: 'xml',
+        mode: 'xml'
       },
       {
         panelName: 'component.wxss',
@@ -377,19 +405,20 @@ module.exports = function (layoutData, opts) {
         panelName: 'component.js',
         panelValue: renderData.js,
         panelType: 'BuilderRaxView',
-        mode: 'javascript',
+        mode: 'javascript'
       },
       {
         panelName: 'component.json',
         panelValue: renderData.json,
         panelType: 'BuilderRaxView',
-        mode: 'javascript',
+        mode: 'javascript'
       }
     ],
     playground: {
       info: '前往下载微信开发者工具',
-      link: 'https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html'
+      link:
+        'https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html'
     },
-    noTemplate: true,
+    noTemplate: true
   };
 };
