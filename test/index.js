@@ -20,7 +20,7 @@ co(function*() {
     _: _,
     helper: dslHelper,
   });
-  const { wxml, wxss, js, json } = renderInfo;
+  const { wxml, wxss, js, json } = renderInfo.renderData;
   fs.ensureDirSync(path.resolve(__dirname, './component'));
   fs.writeFileSync(path.join(__dirname, './component/component.wxml'), wxml);
   fs.writeFileSync(path.join(__dirname, './component/component.wxss'), wxss);

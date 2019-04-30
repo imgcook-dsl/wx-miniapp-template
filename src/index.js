@@ -358,11 +358,7 @@ module.exports = function (layoutData, opts) {
   ]);
 
   return {
-    renderData: renderData,
-    wxml: renderData.wxml,
-    wxss: renderData.wxss,
-    js: renderData.js,
-    json: renderData.json,
+    renderData,
     prettierOpt: {},
     panelDisplay: [
       {
