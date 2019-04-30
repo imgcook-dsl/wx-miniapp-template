@@ -85,7 +85,6 @@ module.exports = function (layoutData, opts) {
     line('}')
   ];
 
-
   const renderStyle = map => [].concat(
     ...Object.entries(map).map(([className, style]) => renderStyleItem(className, style))
   );
