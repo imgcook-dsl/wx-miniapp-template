@@ -2,7 +2,7 @@
 我们会提供开发者一些数据和能力（lint等），开发者可以运用这些数据和能力在我们所提供的虚拟容器里执行自己的动态脚本代码，我们会拿到这段代码运行后返回的模板渲染所需的数据，最后渲染开发者编写的 [xtemplate](https://www.npmjs.com/package/xtemplate) 模板得到输出代码返回给开发者。<br />整个运行环境是在 Node 虚拟机里，我们使用 [vm2](https://github.com/patriksimek/vm2) 来实现这个环境，这里面没有内置的 node 模块和三方包可以调用，具体的开发文档见下面动态代码章节。
 
 ## 用户操作流程
-![|500x400](https://img.alicdn.com/tfs/TB1_6eeSYvpK1RjSZPiXXbmwXXa-1000-800.png)
+<img width="500" src="https://img.alicdn.com/tfs/TB1_6eeSYvpK1RjSZPiXXbmwXXa-1000-800.png" alt="flow chart">
 
 ## 文件目录
 ```bash
@@ -32,7 +32,7 @@ module.exports = function(layoutData, options) {
 }
 ```
 
-![](https://intranetproxy.alipay.com/skylark/lark/0/2019/png/15644/1556071519396-86d1fac8-65a3-4b99-871c-362400a479d2.png#align=center&display=inline&height=503&originHeight=699&originWidth=1037&size=0&status=done&width=746)
+<img width="500" src="https://img.alicdn.com/tfs/TB18kDyTcbpK1RjSZFyXXX_qFXa-1037-699.png" alt="">
 
 ## 传参变量
 我们提供给开发者两个传参变量layoutData和options。
