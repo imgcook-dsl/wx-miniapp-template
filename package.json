@@ -12,7 +12,7 @@
   "devDependencies": {
     "co": "^4.6.0",
     "fs-extra": "^7.0.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.12",
     "prettier": "^1.11.1",
     "thunkify": "^2.1.2",
     "vm2": "^3.5.2",
