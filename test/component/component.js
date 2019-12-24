@@ -1,16 +1,27 @@
 Component({
-  properties: {
-    item_pic: String,
-    item_distance: String,
-    item_title: String,
-    avator_pic: String,
-    tag: String,
-    like_num: String
+  properties: {},
+  data: {
+    data: []
   },
-  data: {},
-  attached: function() {},
-  detached: function() {},
+  lifetimes: {
+    created: function() {
+      console.log("super props");
+    },
+    attached: function() {
+      // 页面创建时执行
+      console.info("Page loaded!");
+    },
+    detached: function() {
+      // 页面销毁时执行
+      console.info("Page unloaded!");
+    }
+  },
   methods: {
-    onTap: function() {}
+    isReadCountShow: function(readCount) {
+      return readCount > 300;
+    },
+    onClick: function(e) {
+      window.open(e.currentTarget.dataset.url, "_blank");
+    }
   }
 });

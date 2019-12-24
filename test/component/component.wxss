@@ -1,123 +1,133 @@
 .box {
-  width: 342rpx;
-  background-color: rgba(255,255,255,1);
-  height: 534rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.main {
-  position: relative;
-  width: 342rpx;
-  height: 342rpx;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   align-items: flex-start;
+  height: 534rpx;
 }
-.item {
+.bd {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  opacity: 1.00;
   width: 342rpx;
   height: 342rpx;
-  position: relative;
+}
+.layer {
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+  width: 342rpx;
+  height: 342rpx;
+  overflow: hidden;
+}
+.bg {
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+  opacity: 1.00;
+  width: 342rpx;
+  height: 342rpx;
 }
 .wrap {
-  border-bottom-right-radius: 15rpx;
-  border-top-right-radius: 15rpx;
-  height: 30rpx;
-  border-bottom-left-radius: 15rpx;
-  background-color: rgba(0,0,0,0.4000000059604645);
-  border-top-left-radius: 15rpx;
-  position: absolute;
-  left: 18rpx;
-  top: 18rpx;
-  display: flex;
-  flex-direction: row;
-  padding-left: 10rpx;
-  padding-right: 9rpx;
-  align-items: center;
   box-sizing: border-box;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 18rpx;
+  margin-left: 18rpx;
+  border-radius: 15rpx;
+  background-color: rgba(0,0,0,0.40);
+  padding-right: 9rpx;
+  padding-left: 10rpx;
+  height: 30rpx;
 }
-.location {
+.riverdinwei {
+  opacity: 1.00;
   width: 14rpx;
   height: 18rpx;
 }
 .distance {
-  font-weight: 400;
-  color: rgba(255,255,255,1);
-  height: 18rpx;
-  font-family: PingFangSC;
-  font-size: 18rpx;
-  line-height: 18rpx;
   margin-left: 4rpx;
+  height: 22rpx;
+  font-weight: 400;
+  font-size: 18rpx;
+  color: #ffffff;
+  line-height: 22rpx;
   white-space: nowrap;
 }
-.submain {
-  height: 89rpx;
-  width: 342rpx;
-  margin-top: 22rpx;
+.main {
   display: flex;
+  align-items: flex-start;
   flex-direction: row;
   justify-content: center;
+  background-color: #ffffff;
+  width: 342rpx;
+  height: 114rpx;
 }
 .title {
-  font-weight: 400;
-  width: 306rpx;
-  color: rgba(51,51,51,1);
+  margin-top: 22rpx;
+  width: 300rpx;
   height: 88rpx;
-  font-family: PingFangSC;
+  font-weight: 400;
   font-size: 30rpx;
+  color: #333333;
   line-height: 44rpx;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .ft {
-  height: 32rpx;
-  width: 342rpx;
-  margin-top: 28rpx;
+  box-sizing: border-box;
   display: flex;
+  align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 18rpx;
+  border-bottom-left-radius: 12rpx;
+  border-bottom-right-radius: 12rpx;
+  background-color: #ffffff;
   padding-right: 17rpx;
-  box-sizing: border-box;
+  padding-left: 18rpx;
+  width: 342rpx;
+  height: 78rpx;
+  overflow: hidden;
 }
-.desc-wrap {
+.block {
   display: flex;
+  align-items: center;
   flex-direction: row;
-  height: 31rpx;
+  height: 30rpx;
 }
-.avator {
+.xianjin {
   width: 30rpx;
   height: 30rpx;
 }
-.desc {
-  font-weight: 300;
-  color: rgba(102,102,102,1);
-  height: 24rpx;
-  font-family: PingFangSC;
-  font-size: 24rpx;
-  line-height: 24rpx;
+.fashion-home {
   margin-left: 6rpx;
-  margin-top: 3rpx;
+  height: 28rpx;
+  font-weight: 300;
+  font-size: 24rpx;
+  color: #666666;
+  line-height: 28rpx;
   white-space: nowrap;
 }
 .group {
   display: flex;
+  align-items: center;
   flex-direction: row;
-  height: 31rpx;
+  height: 30rpx;
 }
-.shoucang {
+.favorite {
   width: 22rpx;
   height: 22rpx;
-  margin-top: 4rpx;
 }
 .num {
-  font-weight: 400;
-  color: rgba(153,153,153,1);
-  height: 22rpx;
-  font-family: PingFangSC;
-  font-size: 22rpx;
-  line-height: 22rpx;
   margin-left: 5rpx;
-  margin-top: 4rpx;
+  height: 26rpx;
+  font-weight: 400;
+  font-size: 22rpx;
+  color: #999999;
+  line-height: 26rpx;
   white-space: nowrap;
 }

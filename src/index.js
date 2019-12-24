@@ -1,78 +1,32 @@
-module.exports = function(layoutData, opts) {
-  if (layoutData.attrs.className === 'root') {
-    layoutData = layoutData.children[0];
-  }
+module.exports = function(schema, options) {
   const renderData = {};
-  const { _, helper, prettier } = opts;
+  const { _, helper, prettier, responsive } = options;
   const { printer, utils } = helper;
 
-  const COMPONENT_TYPE_MAP = {
-    link: 'view',
-    video: 'video',
-    expview: 'view',
-    scroller: 'scroll-view',
-    slider: 'swiper',
-    view: 'view',
-    text: 'text',
-    picture: 'image'
-  };
   const line = (content, level) =>
     utils.line(content, { indent: { space: level * 2 } });
+
+  // style
   const styleMap = {};
+
+  // mock data
   const mockData = {
     properties: {},
     data: {}
   };
+
+  // script
   const scriptMap = {
     created: '',
-    detached: '',
-    methods: {}
+    lifetimes: {},
+    methods: {},
+    data: {},
+    event: {}
   };
-  let modConfig = layoutData.modStyleConfig || {
-    designWidth: 750,
-    designHeight: 1334
-  };
-  const normalizeStyleValue = (key, value) => {
-    switch (key) {
-      case 'font-size':
-      case 'margin-left':
-      case 'margin-top':
-      case 'margin-right':
-      case 'margin-bottom':
-      case 'padding-left':
-      case 'padding-top':
-      case 'padding-right':
-      case 'padding-bottom':
-      case 'max-width':
-      case 'width':
-      case 'height':
-      case 'border-width':
-      case 'border-radius':
-      case 'top':
-      case 'left':
-      case 'right':
-      case 'bottom':
-      case 'line-height':
-      case 'letter-spacing':
-      case 'border-top-right-radius':
-      case 'border-top-left-radius':
-      case 'border-bottom-left-radius':
-      case 'border-bottom-right-radius':
-        value = '' + value;
-        value = value.replace(/(rem)|(px)/, '');
-        value = (Number(value) * 750) / modConfig.designWidth;
-        value = '' + value;
 
-        if (value.length > 3 && value.substr(-3, 3) == 'rem') {
-          value = value.slice(0, -3) + 'rpx';
-        } else {
-          value += 'rpx';
-        }
-        break;
-      default:
-        break;
-    }
-    return value;
+  let modConfig = responsive || {
+    width: 750,
+    height: 1334
   };
 
   const parseStyleObject = style =>
@@ -80,7 +34,7 @@ module.exports = function(layoutData, opts) {
       .filter(([, value]) => value || value === 0)
       .map(([key, value]) => {
         key = _.kebabCase(key);
-        return `${key}: ${normalizeStyleValue(key, value)};`;
+        return `${key}: ${normalizeStyleValue(key, value, modConfig)};`;
       });
 
   const renderStyleItem = (className, style) => [
@@ -106,221 +60,114 @@ module.exports = function(layoutData, opts) {
 
   const renderTemplateAttr = (key, value) =>
     `${key}=${normalizeTemplateAttrValue(value)}`;
-  const getFuncBody = content => {
-    if (content) {
-      return content.match(
-        /(?:\/\*[\s\S]*?\*\/|\/\/.*?\r?\n|[^{])+\{([\s\S]*)\};$/
-      )[1];
-    }
-    return '';
-  };
-  let depth = 0;
-  let { dataBindingStore } = layoutData;
 
-  const getScriptStore = originJson => {
-    return originJson.eventStore && originJson.scriptStore
-      ? (originJson.eventStore || []).map(v => {
-          const contentStore = (originJson.scriptStore || []).find(
-            _v => _v.id === v.scriptId
-          );
-          return {
-            belongId: v.belongId,
-            content: contentStore.content,
-            eventType: v.type,
-            scriptName: contentStore.name
-          };
-        })
-      : originJson.scriptStore || [];
-  };
-  // let scriptStore = originJson.scriptStore || [];
-  let scriptStore = getScriptStore(layoutData);
+  let depth = 0;
+  let { dataSource, methods, lifeCycles, state } = schema;
 
   const renderTemplate = (obj, level = 0) => {
     depth = depth + 1;
 
-    if (Array.isArray(scriptStore)) {
-      // 事件绑定
-      if (scriptStore.length > 0) {
-        scriptStore.forEach(
-          ({ belongId, eventType, scriptName, content }, index) => {
-            if (belongId === obj.id) {
-              if (depth === 1) {
-                if (eventType === 'init') {
-                  scriptMap.created = `
-                  function () {
-                    ${getFuncBody(content)}
-                  }
-                `;
-                } else if (eventType === 'destroy') {
-                  scriptMap.detached = `
-                  function () {
-                    ${getFuncBody(content)}
-                  }
-                `;
-                }
-              }
-              if (eventType === 'onClick') {
-                scriptMap.methods.onTap = `
-                function () {
-                  ${getFuncBody(content)}
-                }
-              `;
-                obj.attrs.bindtap = 'onTap';
-              }
-              if (eventType === 'helper') {
-                scriptMap.methods[scriptName] = `
-                function () {
-                  ${getFuncBody(content)}
-                }
-              `;
-              }
-            }
-          }
+    // handle node changetype
+    const targetName = obj.componentName.toLowerCase();
+    obj.element = COMPONENT_TYPE_MAP[targetName] || targetName;
+
+    if (!obj.props) obj.props = {};
+
+    // loop handler
+    if (obj.loop) {
+      obj.props[WXS_SYNTAX_MAP['for']] = `{{${obj.loop.split('.').pop()}`;
+      obj.props[WXS_SYNTAX_MAP['forItem']] = `${obj.loopArgs[0]}`;
+      obj.props[WXS_SYNTAX_MAP['forIndex']] = `${obj.loopArgs[1]}`;
+    }
+
+    const handlerFuncStr = options => {
+      let { value, item } = options;
+      if (value.content && item) {
+        value.content = value.content.replace(
+          new RegExp('this.' + item + '.', 'g'),
+          'e.currentTarget.dataset.'
         );
       }
-    }
-    // 数据绑定
-    let domDataBinding = [];
-    if (Array.isArray(dataBindingStore)) {
-      domDataBinding = dataBindingStore.filter(v => {
-        if (v.belongId == obj.id) {
-          if (v.value && v.value.isStatic) {
-            return true;
-          } else {
-            if (v.value) {
-              const source = v.value.source;
-              const sourceValue = v.value.sourceValue;
-              if (source && sourceValue) {
-                return true;
-              }
-            }
-            return false;
-          }
-        }
-      });
-    }
-    // console.log(`${obj.id}的数据绑定对象`, domDataBinding);
-    // 处理changetype
-    // obj.element = obj.changeType === 'video' ? obj.changeType : obj.componentType;
-    obj.element = COMPONENT_TYPE_MAP[obj.componentType] || obj.componentType;
-    if (!obj.style) obj.style = {};
-    if (!obj.attrs) obj.attrs = {};
+      return value;
+    };
 
-    if (obj.style.borderWidth) {
-      obj.style.boxSizing = 'border-box';
+    // condition handler
+    if (obj.condition) {
+      obj.props[WXS_SYNTAX_MAP['condition']] = `${obj.condition}`;
     }
 
-    if (obj.type && obj.type.toLowerCase() === 'repeat') {
-      obj.style.display = 'flex';
-      obj.style.flexDirection = 'row';
-      obj.children.forEach(function(child) {
-        delete child.style.marginTop;
-      });
-    }
-
-    domDataBinding.map(item => {
-      const target = item.target[0];
-      if (item.value.isStatic) {
-        // 静态数据
-        obj.attrs[target] = item.value.value;
-      } else {
-        const sourceValue = item.value.sourceValue;
-        let value = '';
-        if (Array.isArray(sourceValue)) {
-          value = sourceValue
-            .map(item => {
-              if (item.type === 'DYNAMIC') {
-                return `{{${item.value.slice(2, -1)}}}`;
-              }
-              return item.value;
-            })
-            .join('');
-        } else {
-          // 通过schema绑定 @TODO
-          value = `{{${item.value.source}.${item.value.sourceValue}}}`;
-        }
-        if (target === 'show') {
-          obj.attrs['wx:if'] = value;
-        } else if (target === 'innerText') {
-          obj.innerText = value;
-        } else {
-          obj.attrs[target] = value;
-        }
+    for (let [key, value] of Object.entries(obj.props)) {
+      if (COMPONENT_EVENT_MAP[key]) {
+        obj.props[COMPONENT_EVENT_MAP[key]] = key;
+        scriptMap.methods[key] = handlerFuncStr({
+          value: parseFunction(value),
+          item: obj.props[WXS_SYNTAX_MAP['forItem']]
+        });
       }
-    });
+      if (typeof value === 'string' && value.match(/this\./)) {
+        obj.props[key] = value.replace(/this\./g, '');
+      }
+    }
+
     switch (obj.element) {
       case 'view':
         obj.element = 'view';
-        obj.style.display = 'flex';
         break;
       case 'picture':
         obj.element = 'image';
         obj.children = null;
         break;
       case 'text':
-        obj.children = obj.innerText;
+        obj.children = obj.props.text;
         break;
     }
 
-    if (obj.style.lines == 1 || obj.attrs.lines == 1) {
-      delete obj.style.width;
+    if (obj.props.className) {
+      obj.props.class = _.kebabCase(obj.props.className);
+      delete obj.props.className;
+      styleMap[obj.props.class] = {
+        ...styleMap[obj.props.class],
+        ...obj.props.style
+      };
     }
-
-    delete obj.style.lines;
-    delete obj.attrs.x;
-    delete obj.attrs.y;
-    if (obj.attrs.className) {
-      obj.attrs.class = _.kebabCase(obj.attrs.className);
-      delete obj.attrs.className;
+    if (obj.props.source && obj.props.src) {
+      obj.props.src = obj.props.source;
+      delete obj.props.source;
     }
-    if (obj.attrs.source && obj.attrs.src) {
-      obj.attrs.src = obj.attrs.source;
-      delete obj.attrs.source;
-    }
-    obj.attrs.class = `${obj.attrs.class}`;
-    styleMap[obj.attrs.class] = {
-      ...styleMap[obj.attrs.class],
-      ...obj.style
-    };
 
     let ret = [];
     let nextLine = '';
-    const attrs = Object.entries(obj.attrs).filter(([key, value]) => {
-      if (obj.element === 'image') {
-        return ['class', 'src'].includes(key);
-      } else if (obj.element === 'video') {
-        return [
-          'class',
-          'src',
-          'controls',
-          'autoplay',
-          'muted',
-          'poster'
-        ].includes(key);
-      }
-      return key === 'class';
+
+    const props = Object.entries(obj.props).filter(([key, value]) => {
+      return ['style', 'text', 'onClick'].indexOf(key) < 0;
     });
-    if (attrs.length > 3) {
+
+    if (props.length > 3) {
       ret.push(line(`<${obj.element}`, level));
       ret = ret.concat(
-        attrs.map(([key, value]) =>
-          line(renderTemplateAttr(key, value), level + 1)
-        )
+        props.map(([key, value]) => {
+          return line(renderTemplateAttr(key, value), level + 1);
+        })
       );
     } else {
       nextLine = `<${obj.element}`;
-      if (attrs.length) {
-        nextLine += ` ${attrs
-          .map(([key, value]) => renderTemplateAttr(key, value))
+      if (props.length) {
+        nextLine += ` ${props
+          .map(([key, value]) => {
+            return renderTemplateAttr(key, value);
+          })
           .join(' ')}`;
       }
     }
+
     if (obj.children) {
       if (Array.isArray(obj.children) && obj.children.length) {
         // 多行 Child
         ret.push(line(`${nextLine}>`, level));
         ret = ret.concat(
-          ...obj.children.map(o => renderTemplate(o, level + 1))
+          ...obj.children.map(o => {
+            return renderTemplate(o, level + 1);
+          })
         );
         ret.push(line(`</${obj.element}>`, level));
       } else {
@@ -334,36 +181,60 @@ module.exports = function(layoutData, opts) {
     return ret;
   };
 
-  const renderScript = (scriptMap, dataBindingStore = []) => {
-    const { attached, detached, methods } = scriptMap;
-    const properties = [];
-    dataBindingStore.forEach(item => {
-      if (!item.value.isStatic) {
-        const {
-          value: { sourceValue }
-        } = item;
-        if (Array.isArray(sourceValue)) {
-          sourceValue.forEach(v => {
-            const key = v.value.slice(7, -1);
-            if (key) {
-              properties.push(`${key}: String`);
-            }
-          });
-        }
+  // methods handler
+  methods &&
+    Object.entries(methods).map(([key, value]) => {
+      scriptMap.methods[key] = parseFunction(value);
+    });
+
+  lifeCycles &&
+    Object.entries(lifeCycles).map(([key, value]) => {
+      scriptMap[COMPONENT_LIFETIMES_MAP[key]] = parseFunction(value);
+    });
+
+  // dataSource &&
+  //   Object.entries(dataSource).map(([key, value]) => {
+  //     // console.log(key);
+  //   });
+
+  state &&
+    Object.entries(state).map(([key, value]) => {
+      if (value instanceof Array) {
+        scriptMap.data[key] = '[]';
+      } else {
+        scriptMap.data[key] = JSON.stringify(value);
       }
     });
+
+  const renderScript = scriptMap => {
+    const { attached, detached, methods, created, data } = scriptMap;
+    const properties = [];
+
     return `
       Component({
         properties: {
           ${properties.join()}
         },
-        data: {},
-        attached: ${attached || 'function() {}'},
-        detached: ${detached || 'function() {}'},
+        data: {
+          ${Object.entries(data)
+            .map(([key, value]) => {
+              return `${key}: ${value}`;
+            })
+            .join(',')}
+        },
+        lifetimes: {
+          created:  ${(created && `function() {${created.content}}`) ||
+            `function(){}`},
+          attached: ${(attached && `function() {${attached.content}}`) ||
+            "function() {\n // 页面创建时执行 \n console.info('Page loaded!')}"},
+          detached: ${(detached && `function() {${detached.content}}`) ||
+            "function() {\n // 页面销毁时执行 \n console.info('Page unloaded!')}"},
+        },
         methods: {
           ${Object.entries(methods)
             .map(([key, value]) => {
-              return `${key}: ${value}`;
+              const { params, content } = value;
+              return `${key}: function(${params}) {${content}}`;
             })
             .join(',')}
         },
@@ -371,9 +242,9 @@ module.exports = function(layoutData, opts) {
     `;
   };
 
-  renderData.wxml = printer(renderTemplate(layoutData));
+  renderData.wxml = printer(renderTemplate(schema));
   renderData.wxss = printer(renderStyle(styleMap));
-  renderData.js = prettier.format(renderScript(scriptMap, dataBindingStore), {
+  renderData.js = prettier.format(renderScript(scriptMap), {
     parser: 'babel'
   });
 
@@ -421,4 +292,92 @@ module.exports = function(layoutData, opts) {
     },
     noTemplate: true
   };
+};
+
+const COMPONENT_TYPE_MAP = {
+  page: 'view',
+  link: 'view',
+  video: 'video',
+  expview: 'view',
+  scroller: 'scroll-view',
+  slider: 'swiper',
+  view: 'view',
+  text: 'text',
+  picture: 'image'
+};
+
+const COMPONENT_LIFETIMES_MAP = {
+  _constructor: 'created',
+  render: '',
+  componentDidMount: 'attached',
+  componentDidUpdate: '',
+  componentWillUnmount: 'detached'
+};
+
+const COMPONENT_EVENT_MAP = {
+  onClick: 'bindtap'
+};
+
+const WXS_SYNTAX_MAP = {
+  for: 'wx:for',
+  forItem: 'wx:for-item',
+  forIndex: 'wx:for-index',
+  condition: 'wx:if'
+};
+
+// parse function, return params and content
+const parseFunction = func => {
+  const funcString = func.toString();
+  const params = funcString.match(/\([^\(\)]*\)/)[0].slice(1, -1);
+  const content = funcString.slice(
+    funcString.indexOf('{') + 1,
+    funcString.lastIndexOf('}')
+  );
+  return {
+    params,
+    content
+  };
+};
+
+const normalizeStyleValue = (key, value, config) => {
+  switch (key) {
+    case 'font-size':
+    case 'margin-left':
+    case 'margin-top':
+    case 'margin-right':
+    case 'margin-bottom':
+    case 'padding-left':
+    case 'padding-top':
+    case 'padding-right':
+    case 'padding-bottom':
+    case 'max-width':
+    case 'width':
+    case 'height':
+    case 'border-width':
+    case 'border-radius':
+    case 'top':
+    case 'left':
+    case 'right':
+    case 'bottom':
+    case 'line-height':
+    case 'letter-spacing':
+    case 'border-top-right-radius':
+    case 'border-top-left-radius':
+    case 'border-bottom-left-radius':
+    case 'border-bottom-right-radius':
+      value = '' + value;
+      value = value.replace(/(rem)|(px)/, '');
+      value = (Number(value) * 750) / config.width;
+      value = '' + value;
+
+      if (value.length > 3 && value.substr(-3, 3) == 'rem') {
+        value = value.slice(0, -3) + 'rpx';
+      } else {
+        value += 'rpx';
+      }
+      break;
+    default:
+      break;
+  }
+  return value;
 };

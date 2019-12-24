@@ -1,22 +1,32 @@
 <view class="box">
-  <view class="main">
-    <image src="{{data.item_pic}}" class="item"></image>
-    <view class="wrap">
-      <image src="https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fcb3bd900b8311e986c47f0232efd9cf.png" class="location"></image>
-      <text class="distance">距离{{data.item_distance}}m</text>
-    </view>
-  </view>
-  <view class="submain">
-    <text class="title">{{data.item_title}}</text>
-  </view>
-  <view class="ft">
-    <view class="desc-wrap">
-      <image src="{{data.avator_pic}}" class="avator"></image>
-      <text class="desc">{{data.tag}}</text>
-    </view>
-    <view class="group">
-      <image src="https://ai-sample.oss-cn-hangzhou.aliyuncs.com/test/fb4ba2100b8311e9aeba3d40ac587801.png" class="shoucang"></image>
-      <text class="num">{{data.like_num}}</text>
-    </view>
-  </view>
+  <div
+    data-url="{{item.url}}"
+    key="{{item.index}}"
+    wx:for="{{data}}"
+    wx:for-item="item"
+    wx:for-index="index"
+    bindtap="onClick"
+  >
+    <div class="bd">
+      <image src="https://img.alicdn.com/tfs/TB1bLoWoYH1gK0jSZFwXXc7aXXa-684-684.png" class="layer" />
+      <image src="{{item.coverImage}}" class="bg" />
+      <div class="wrap">
+        <image src="https://img.alicdn.com/tfs/TB1mtZRoVT7gK0jSZFpXXaTkpXa-28-36.png" class="riverdinwei" />
+        <text class="distance">距离500m</text>
+      </div>
+    </div>
+    <div class="main">
+      <text class="title">{{item.title}}</text>
+    </div>
+    <div class="ft">
+      <div class="block">
+        <image src="https://img.alicdn.com/tfs/TB1OvsYoW61gK0jSZFlXXXDKFXa-60-60.png" class="xianjin" />
+        <text class="fashion-home">{{item.user.userName}}</text>
+      </div>
+      <div wx:if="{{isReadCountShow(item.readCount)}}" class="group">
+        <image src="https://img.alicdn.com/tfs/TB1arwYo7T2gK0jSZFkXXcIQFXa-46-44.png" class="favorite" />
+        <text class="num">{{item.readCount}}</text>
+      </div>
+    </div>
+  </div>
 </view>
