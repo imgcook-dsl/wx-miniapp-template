@@ -296,6 +296,7 @@ module.exports = function(schema, options) {
 
 const COMPONENT_TYPE_MAP = {
   page: 'view',
+  div: 'view',
   link: 'view',
   video: 'video',
   expview: 'view',
