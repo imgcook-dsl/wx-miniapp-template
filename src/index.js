@@ -1,3 +1,4 @@
+
 module.exports = function(schema, options) {
   const renderData = {};
   const { _, helper, prettier, responsive } = options;
@@ -96,6 +97,7 @@ module.exports = function(schema, options) {
       obj.props[WXS_SYNTAX_MAP['condition']] = `${obj.condition}`;
     }
 
+    // event handler
     for (let [key, value] of Object.entries(obj.props)) {
       if (COMPONENT_EVENT_MAP[key]) {
         obj.props[COMPONENT_EVENT_MAP[key]] = key;
@@ -162,7 +164,7 @@ module.exports = function(schema, options) {
 
     if (obj.children) {
       if (Array.isArray(obj.children) && obj.children.length) {
-        // 多行 Child
+        // Multi-line Child
         ret.push(line(`${nextLine}>`, level));
         ret = ret.concat(
           ...obj.children.map(o => {
@@ -171,11 +173,11 @@ module.exports = function(schema, options) {
         );
         ret.push(line(`</${obj.element}>`, level));
       } else {
-        // 单行 Child
+        // Single line Child
         ret.push(line(`${nextLine}>${obj.children}</${obj.element}>`, level));
       }
     } else {
-      // 自闭合标签
+      // Self-closing label
       ret.push(line(`${nextLine} />`, level));
     }
     return ret;
@@ -187,6 +189,7 @@ module.exports = function(schema, options) {
       scriptMap.methods[key] = parseFunction(value);
     });
 
+  // lifeCycles handler
   lifeCycles &&
     Object.entries(lifeCycles).map(([key, value]) => {
       scriptMap[COMPONENT_LIFETIMES_MAP[key]] = parseFunction(value);
@@ -226,9 +229,9 @@ module.exports = function(schema, options) {
           created:  ${(created && `function() {${created.content}}`) ||
             `function(){}`},
           attached: ${(attached && `function() {${attached.content}}`) ||
-            "function() {\n // 页面创建时执行 \n console.info('Page loaded!')}"},
+            "function() {\n // Executed when the component instance enters the page node tree \n console.info('Page loaded!')}"},
           detached: ${(detached && `function() {${detached.content}}`) ||
-            "function() {\n // 页面销毁时执行 \n console.info('Page unloaded!')}"},
+            "function() {\n // Executed when the component instance is removed from the page node tree \n console.info('Page unloaded!')}"},
         },
         methods: {
           ${Object.entries(methods)
