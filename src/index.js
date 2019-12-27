@@ -319,7 +319,7 @@ const COMPONENT_LIFETIMES_MAP = {
 };
 
 const COMPONENT_EVENT_MAP = {
-  onClick: 'bindtap'
+  onClick: 'bindtap',
 };
 
 const WXS_SYNTAX_MAP = {

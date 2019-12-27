@@ -1,26 +1,32 @@
 const co = require('co');
 const fs = require('fs-extra');
 const path = require('path');
+
 const prettier = require('prettier');
-const {NodeVM} = require('vm2');
 const _ = require('lodash');
-const dslHelper = require('@imgcook/dsl-helper');
-const newSchema = require('./newSchema');
+const helper = require('@imgcook/dsl-helper');
+
+const { NodeVM } = require('vm2');
 const vm = new NodeVM({
   console: 'inherit',
   sandbox: {}
 });
+const schema = require('./schema');
+
 co(function*() {
-  const code = fs.readFileSync(path.resolve(__dirname, '../src/index.js'), 'utf8');
-  const renderInfo = vm.run(code)(newSchema, {
-    prettier: prettier,
-    _: _,
-    helper: dslHelper,
+  const code = fs.readFileSync(
+    path.resolve(__dirname, '../src/index.js'),
+    'utf8'
+  );
+  const renderInfo = vm.run(code)(schema, {
+    prettier,
+    _,
+    helper
   });
-  const { wxml, wxss, js, json } = renderInfo.renderData;
-  fs.ensureDirSync(path.resolve(__dirname, './component'));
-  fs.writeFileSync(path.join(__dirname, './component/component.wxml'), wxml);
-  fs.writeFileSync(path.join(__dirname, './component/component.wxss'), wxss);
-  fs.writeFileSync(path.join(__dirname, './component/component.js'), js);
-  fs.writeFileSync(path.join(__dirname, './component/component.json'), json);
+  const panelDisplay = renderInfo.panelDisplay;
+  fs.ensureDirSync(path.resolve(__dirname, '../code'));
+  panelDisplay.map(item => {
+    const { panelValue, panelName } = item;
+    fs.writeFileSync(path.join(__dirname, `../code/${panelName}`), panelValue);
+  });
 });
