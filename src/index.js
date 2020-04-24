@@ -69,16 +69,20 @@ module.exports = function(schema, options) {
     depth = depth + 1;
 
     // handle node changetype
-    const targetName = obj.componentName && obj.componentName.toLowerCase() || 'view';
+    const targetName = obj.componentName.toLowerCase();
     obj.element = COMPONENT_TYPE_MAP[targetName] || targetName;
 
     if (!obj.props) obj.props = {};
 
     // loop handler
     if (obj.loop) {
-      obj.props[WXS_SYNTAX_MAP['for']] = `{{${obj.loop.split('.').pop()}`;
-      obj.props[WXS_SYNTAX_MAP['forItem']] = `${obj.loopArgs[0]}`;
-      obj.props[WXS_SYNTAX_MAP['forIndex']] = `${obj.loopArgs[1]}`;
+      if (typeof obj.loop === 'string') {
+        obj.props[WXS_SYNTAX_MAP['for']] = `{{${obj.loop.split('.').pop()}`;
+      } else {
+        obj.props[WXS_SYNTAX_MAP['for']] = `{{${JSON.stringify(obj.loop)}}}`
+      }
+      obj.props[WXS_SYNTAX_MAP['forItem']] = obj.loopArgs && `${obj.loopArgs[0]}` || 'item';
+      obj.props[WXS_SYNTAX_MAP['forIndex']] = obj.loopArgs && `${obj.loopArgs[1]}` || 'index';
     }
 
     const handlerFuncStr = options => {
