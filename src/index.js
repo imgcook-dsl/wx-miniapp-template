@@ -69,7 +69,7 @@ module.exports = function(schema, options) {
     depth = depth + 1;
 
     // handle node changetype
-    const targetName = obj.componentName.toLowerCase();
+    const targetName = obj.componentName && obj.componentName.toLowerCase() || 'view';
     obj.element = COMPONENT_TYPE_MAP[targetName] || targetName;
 
     if (!obj.props) obj.props = {};
