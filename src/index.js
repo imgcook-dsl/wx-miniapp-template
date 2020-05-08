@@ -51,16 +51,22 @@ module.exports = function(schema, options) {
       )
     );
 
-  const normalizeTemplateAttrValue = value => {
+  const normalizeTemplateAttrValue = ({key, value}) => {
     if (typeof value === 'string') {
       return JSON.stringify(value);
+    } else if (key === 'style') {
+      var str = '"';
+      Object.entries(value).map(([k, val]) => {
+        str +=`${k}:${normalizeStyleValue(k, val, modConfig)};`
+      });
+      return `${str}"`;
     } else {
       return `"${JSON.stringify(value)}"`;
     }
   };
 
   const renderTemplateAttr = (key, value) =>
-    `${key}=${normalizeTemplateAttrValue(value)}`;
+    `${key}=${normalizeTemplateAttrValue({key, value})}`;
 
   let depth = 0;
   let { dataSource, methods, lifeCycles, state } = schema;
@@ -145,6 +151,9 @@ module.exports = function(schema, options) {
     let nextLine = '';
 
     const props = Object.entries(obj.props).filter(([key, value]) => {
+      if (key === 'style' && obj.props && !obj.props.class) {
+        return true;
+      }
       return ['style', 'text', 'onClick'].indexOf(key) < 0;
     });
 
