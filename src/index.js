@@ -57,6 +57,7 @@ module.exports = function(schema, options) {
     } else if (key === 'style') {
       var str = '"';
       Object.entries(value).map(([k, val]) => {
+        k = _.kebabCase(k);
         str +=`${k}:${normalizeStyleValue(k, val, modConfig)};`
       });
       return `${str}"`;
