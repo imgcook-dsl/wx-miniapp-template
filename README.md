@@ -1,19 +1,25 @@
-## 概述
+English | [简体中文](https://github.com/imgcook-dsl/wx-miniapp-template/blob/master/README.zh-CN.md)
 
-为了让开发者能够在 imgcook 平台还原生成满足自己诉求的代码，我们提供了开放的 DSL 机制，在这套开放体系下，开发者可以根据 imgcook 提供的数据和能力生成自己所需的代码，不再局限于官方所提供的代码。
+## Abstract
 
-## 如何使用
+To provide a better experience for users who use imgcook to generate codes on multiple platforms, we provide Open DSL System (open domain-specific language system) that transcodes imgcook schema to any programming languages you love. The developers can use default DSLs provided imgcook (React, React Hooks, Rax, etc.) or submit there own DSLs to generate customized codes.
 
-DSL 使用方式是在[编辑器](https://www.imgcook.com/editor#/)点击「生成代码」按钮选择的 DSL 列表默认加载使用的 DSL 官方提供的和自己定义的(如图1)，如果要使用其他开发者开发的 DSL 需要去 [DSL广场](https://www.imgcook.com/dsl)(如图2)关注，关注后会在生成代码 DSL 选择列表中出现。
+## Usage
 
-<img src="https://gw.alicdn.com/imgextra/i3/O1CN01jYTHv81qNig5iq1cP_!!6000000005484-2-tps-2816-1592.png">
-<div align="center">图1</div>
-<br><br>
+### Select a DSL for code generation
 
-<img src="https://gw.alicdn.com/imgextra/i1/O1CN01QyHOTB1MK75O8LXOE_!!6000000001415-2-tps-2816-1596.png">
-<div align="center">图2</div>
+In the imgcook editor, you can select a DSL for your project in the「code generation」panel. After that, we will generate your desired codes in the format of the language you chose.
+<br/><br/>
+![pic 1](https://gw.alicdn.com/imgextra/i3/O1CN01jYTHv81qNig5iq1cP_!!6000000005484-2-tps-2816-1592.png)
+<br/><br/>
 
+### Use a third-party DSL
 
-## 如何开发
+If you do not want to use the official DSL provided by imgcook. You can go to the [DSL Market](https://www.imgcook.com/dsl) to add the third-party DSLs to your own DSL list.
+<br/><br/>
+![pic 2](https://gw.alicdn.com/imgextra/i1/O1CN01QyHOTB1MK75O8LXOE_!!6000000001415-2-tps-2816-1596.png)
+<br/><br/>
 
-参考开发文档：https://www.imgcook.com/docs?slug=dsl-dev
+## How to make your own DSL
+
+Please refer to the DSL development part: https://www.imgcook.com/docs?slug=dsl-dev
