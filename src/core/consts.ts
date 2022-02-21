@@ -43,6 +43,7 @@ export let DSL_CONFIG: IDslConfig = {
   scale: 1,
   cssUnit: 'rpx',
   cssStyle: 'camelCase',
+  outputStyle: 'component',
   htmlFontSize: 16
 };
 
@@ -51,3 +52,36 @@ export const initConfig = (cfg) => {
   DSL_CONFIG = Object.assign(DSL_CONFIG, cfg)
 }
 
+
+export const COMPONENT_TYPE_MAP = {
+  page: 'view',
+  div: 'view',
+  block: 'view',
+  link: 'view',
+  video: 'video',
+  expview: 'view',
+  scroller: 'scroll-view',
+  slider: 'swiper',
+  view: 'view',
+  text: 'text',
+  picture: 'image'
+};
+
+export const COMPONENT_LIFETIMES_MAP = {
+  _constructor: 'created',
+  render: '',
+  componentDidMount: 'attached',
+  componentDidUpdate: '',
+  componentWillUnmount: 'detached'
+};
+
+export const COMPONENT_EVENT_MAP = {
+  onClick: 'bindtap',
+};
+
+export const WXS_SYNTAX_MAP = {
+  for: 'wx:for',
+  forItem: 'wx:for-item',
+  forIndex: 'wx:for-index',
+  condition: 'wx:if'
+};
